@@ -1,0 +1,70 @@
+﻿
+@model  OtoGarage.Controllers.DashboardIndexModel
+@{
+    ViewBag.Title = "Request";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<h2>Request</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="form-horizontal">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model=>model.Name, null, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.PickupAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(m => m.PickupAddress.Id, Model.PickupAreas, new { htmlAttributes = new { @class = "form-control" } }) <br />
+            </div>
+        </div>
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.PickupDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PickupDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PickupDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+                Time: Time picker<br />
+
+                Drop information @Html.DropDownListFor(m => m.PickupAddress.Id, Model.PickupAreas, new { htmlAttributes = new { @class = "form-control" } }) <br />
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.DropupDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DropupDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DropupDate, "", new { @class = "text-danger" })
+            </div>
+        </div><br />
+
+                Fuel:@Html.RadioButton("Radio1", "Petrol") Petrol<br />
+                @Html.RadioButton("Radio1", "Diesel") Diesel
+
+            
+
+        </div>
+}
+<script>
+
+
+    $("#PickupDate").datepicker({
+        minDate: 0 + 8
+    });
+    $("#DropupDate").datepicker({
+        minDate: 0 + 8
+    });
+</script>
